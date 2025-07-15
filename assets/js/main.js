@@ -226,4 +226,23 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+
+    /**
+   * Load service details based on URL query (for service.html)
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const section = params.get("section");
+
+  const sections = ["sims", "coi", "afp","dfs","attd"];
+
+  sections.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = (id === section) ? "block" : "none";
+    }
+  });
+});
+
+
 })();
