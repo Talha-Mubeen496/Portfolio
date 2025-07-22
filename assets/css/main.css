@@ -52,6 +52,15 @@
   --contrast-color: #ffffff;
 }
 
+.loading,
+.sent-message {
+  display: none;
+  color: green;
+}
+.error-message {
+  color: red;
+}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;

@@ -1098,13 +1098,18 @@
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
+    // Show loading message
+    document.querySelector('.loading').style.display = 'block';
+    document.querySelector('.error-message').textContent = '';
+    document.querySelector('.sent-message').style.display = 'none';
+
     const formData = {
       name: form.name.value,
       email: form.email.value,
       subject: form.subject.value,
       message: form.message.value
     };
-// SMTP 
+
     try {
       const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
@@ -1115,12 +1120,22 @@
       });
 
       const text = await response.text();
-      alert(text); // or display success message in your UI
-    } catch (err) {
-      alert('Something went wrong. Please try again later.');
+
+      document.querySelector('.loading').style.display = 'none';
+
+      if (response.ok) {
+        document.querySelector('.sent-message').style.display = 'block';
+        form.reset();
+      } else {
+        document.querySelector('.error-message').textContent = text || 'Failed to send message';
+      }
+    } catch (error) {
+      document.querySelector('.loading').style.display = 'none';
+      document.querySelector('.error-message').textContent = 'Something went wrong, please try again.';
     }
   });
 </script>
+
 </body>
 
 </html>
