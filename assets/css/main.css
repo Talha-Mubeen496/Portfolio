@@ -52,11 +52,11 @@
   --contrast-color: #ffffff;
 }
 
-/* .loading,
+.loading,
 .sent-message,
 .error-message {
   display: none;
-} */
+}
 
 .loading {
   color: #666;
