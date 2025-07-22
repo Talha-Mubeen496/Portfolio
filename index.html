@@ -990,7 +990,7 @@
                 </div>
                 <div class="content">
                   <h4>Phone Number</h4>
-                  <p>+92 3209103268</p>
+                  <p>+92 (320) 910-3268</p>
                   <!-- <p>+92 6678 254445 41</p> -->
                 </div>
               </div>
@@ -1013,7 +1013,7 @@
               <h3>Get In Touch</h3>
               <p>Have a project in mind or just want to say hi? Drop me a message!</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form id="contact-form" class="php-email-form">
                 <div class="row gy-4">
 
                   <div class="col-md-6">
@@ -1092,7 +1092,35 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+<script>
+  const form = document.getElementById('contact-form');
 
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value
+    };
+
+    try {
+      const response = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const text = await response.text();
+      alert(text); // or display success message in your UI
+    } catch (err) {
+      alert('Something went wrong. Please try again later.');
+    }
+  });
+</script>
 </body>
 
 </html>
