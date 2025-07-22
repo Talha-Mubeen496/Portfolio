@@ -1094,14 +1094,16 @@
   <script src="assets/js/main.js"></script>
 <script>
   const form = document.getElementById('contact-form');
+  const loading = document.querySelector('.loading');
+  const errorMessage = document.querySelector('.error-message');
+  const sentMessage = document.querySelector('.sent-message');
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Show loading message
-    document.querySelector('.loading').style.display = 'block';
-    document.querySelector('.error-message').textContent = '';
-    document.querySelector('.sent-message').style.display = 'none';
+    loading.style.display = 'block';
+    errorMessage.style.display = 'none';
+    sentMessage.style.display = 'none';
 
     const formData = {
       name: form.name.value,
@@ -1119,22 +1121,24 @@
         body: JSON.stringify(formData)
       });
 
-      const text = await response.text();
-
-      document.querySelector('.loading').style.display = 'none';
+      loading.style.display = 'none';
 
       if (response.ok) {
-        document.querySelector('.sent-message').style.display = 'block';
+        sentMessage.style.display = 'block';
         form.reset();
       } else {
-        document.querySelector('.error-message').textContent = text || 'Failed to send message';
+        const errorText = await response.text();
+        errorMessage.textContent = errorText || 'Failed to send message';
+        errorMessage.style.display = 'block';
       }
     } catch (error) {
-      document.querySelector('.loading').style.display = 'none';
-      document.querySelector('.error-message').textContent = 'Something went wrong, please try again.';
+      loading.style.display = 'none';
+      errorMessage.textContent = 'Something went wrong. Please try again.';
+      errorMessage.style.display = 'block';
     }
   });
 </script>
+
 
 </body>
 
