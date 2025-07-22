@@ -1013,7 +1013,7 @@
               <h3>Get In Touch</h3>
               <p>Have a project in mind or just want to say hi? Drop me a message!</p>
 
-              <form id="contact-form" class="php-email-form">
+              <form id="contact-forms" class="php-email-form" action="#" novalidate>
                 <div class="row gy-4">
 
                   <div class="col-md-6">
@@ -1093,7 +1093,7 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 <script>
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById('contact-forms');
   const loading = document.querySelector('.loading');
   const errorMessage = document.querySelector('.error-message');
   const sentMessage = document.querySelector('.sent-message');
